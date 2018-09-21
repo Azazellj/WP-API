@@ -1,0 +1,1 @@
+include ':app', ':wp_core', ':wp_compiler', ':wp_anotation', ':wp_internal'

@@ -1,0 +1,13 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation project(path: ':wp_anotation')
+
+    implementation deps.squareup.javapoet
+    implementation deps.auto.common
+
+    compileOnly deps.auto.service
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
