@@ -4,20 +4,7 @@ import com.azazellj.wp.anotation.WPArgsBuilder;
 import com.azazellj.wp.compiler.generator.BuilderGenerator;
 import com.google.auto.service.AutoService;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Filer;
-import javax.annotation.processing.Messager;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.Processor;
-import javax.annotation.processing.RoundEnvironment;
+import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -27,11 +14,12 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
+import java.util.*;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @AutoService(Processor.class)
 public class CompilerProcessor extends AbstractProcessor {
-
 
     Filer filer;
     Messager messager;
@@ -66,12 +54,10 @@ public class CompilerProcessor extends AbstractProcessor {
     }
 
     private void generateMockClasses() {
-        try {
-            for (BuilderClass builderClass : builderClasses.values()) {
-                BuilderGenerator.generateClass(elements, types, filer, messager, builderClass);
+        for (BuilderClass builderClass : builderClasses.values()) {
+            if (!BuilderGenerator.generateClass(filer, messager, builderClass)) {
+                break;
             }
-        } catch (IOException ioEx) {
-            error(null, ioEx.toString());
         }
 
         builderClasses.clear();
@@ -109,15 +95,17 @@ public class CompilerProcessor extends AbstractProcessor {
 
     private boolean isValidAnnotatedElement(Element element) {
         boolean isValid = true;
-        if (element.getKind() != ElementKind.CLASS) {
-            error(element, "Only classes can be annotated with @%s", WPArgsBuilder.class.getSimpleName());
-            isValid = false;
-        }
-        if (element.getModifiers().contains(Modifier.PRIVATE)) {
-            error(element, "Abstract class can`t be annotated with @%s", WPArgsBuilder.class.getSimpleName());
-            isValid = false;
-        }
+//        if (element.getKind() != ElementKind.CLASS) {
+//            error(element, "Only classes can be annotated with @%s", WPArgsBuilder.class.getSimpleName());
+//            isValid = false;
+//        }
+//        if (element.getModifiers().contains(Modifier.PRIVATE)) {
+//            error(element, "Abstract class can`t be annotated with @%s", WPArgsBuilder.class.getSimpleName());
+//            isValid = false;
+//        }
 
+
+        // TODO: 9/20/18 add validation
         return isValid;
     }
 

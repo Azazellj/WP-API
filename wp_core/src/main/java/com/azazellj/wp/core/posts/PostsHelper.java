@@ -34,6 +34,32 @@ public interface PostsHelper {
 
     @WPArgsBuilder(
             className = "CreatePostBuilder",
+            fields = {
+                    WPField.DATE,
+                    WPField.DATE_GTM,
+                    WPField.SLUG,
+                    WPField.STATUS,
+                    WPField.PASSWORD,
+                    WPField.TITLE,
+                    WPField.CONTENT,
+                    WPField.AUTHOR,
+                    WPField.EXCERPT,
+                    WPField.FEATURED_MEDIA,
+                    WPField.COMMENT_STATUS,
+                    WPField.PING_STATUS,
+                    WPField.FORMAT,
+                    WPField.META,
+                    WPField.STICKY,
+                    WPField.TEMPLATE,
+                    WPField.CATEGORIES,
+                    WPField.TAGS
+            }
+    )
+    void createPost();
+
+
+    @WPArgsBuilder(
+            className = "RetrievePostBuilder",
             args = {
                     WPArg.CONTEXT
             },
@@ -41,6 +67,40 @@ public interface PostsHelper {
                     WPField.ID,
                     WPField.PASSWORD
             })
-    void createPost();
+    void retrievePost();
 
+
+    @WPArgsBuilder(
+            className = "UpdatePostBuilder",
+            fields = {
+                    WPField.ID,
+                    WPField.DATE,
+                    WPField.DATE_GTM,
+                    WPField.SLUG,
+                    WPField.STATUS,
+                    WPField.PASSWORD,
+                    WPField.TITLE,
+                    WPField.CONTENT,
+                    WPField.AUTHOR,
+                    WPField.EXCERPT,
+                    WPField.FEATURED_MEDIA,
+                    WPField.COMMENT_STATUS,
+                    WPField.PING_STATUS,
+                    WPField.FORMAT,
+                    WPField.META,
+                    WPField.STICKY,
+                    WPField.TEMPLATE,
+                    WPField.CATEGORIES,
+                    WPField.TAGS
+            }
+    )
+    void updatePost();
+
+
+    @WPArgsBuilder(
+            className = "DeletePostBuilder",
+            args = {WPArg.FORCE},
+            fields = {WPField.ID}
+    )
+    void deletePost();
 }

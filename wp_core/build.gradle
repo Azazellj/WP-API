@@ -3,6 +3,7 @@ apply plugin: 'java-library'
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation project(path: ':wp_anotation')
+    annotationProcessor project(':wp_compiler')
 }
 
 sourceCompatibility = "8"

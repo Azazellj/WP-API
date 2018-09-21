@@ -1,6 +1,5 @@
 package com.azazellj.wp.compiler.example;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +36,6 @@ public final class PersonRequestBuilder {
     }
 
     public Map<String, Object> get() {
-        return Collections.unmodifiableMap(map);
+        return map;
     }
 }

@@ -150,7 +150,13 @@ public enum WPArg implements WPParam {
     /**
      * Limit result set to items that are sticky.
      */
-    STICKY("sticky");
+    STICKY("sticky"),
+
+
+    /**
+     * Whether to bypass trash and force deletion.
+     */
+    FORCE("force");
 
 
     private String argName;
